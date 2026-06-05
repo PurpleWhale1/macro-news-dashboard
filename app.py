@@ -54,7 +54,7 @@ def draw_gauge_chart(score):
         mode="gauge+number",
         value=score,
         domain={'x': [0, 1], 'y': [0, 1]},
-        title={'text': "시장 감성 온도", 'font': {'size': 20, 'color': 'gray'}},
+        title={'text': "시장 예상 반응", 'font': {'size': 20, 'color': 'gray'}},
         gauge={
             'axis': {'range': [0, 100], 'tickwidth': 1, 'tickcolor': "darkblue"},
             'bar': {'color': "#4B4B4B", 'thickness': 0.2}, 
@@ -106,13 +106,13 @@ def chat_with_ai(article_content, previous_chat, user_question):
     except: return "오류가 발생했습니다."
 
 # [5. 메인 UI 구성]
-st.title("📈 AI 경제 인사이트 대시보드")
+st.title("📈 경제 뉴스 정복하기")
 st.markdown("관심 있는 섹션과 페이지를 자유롭게 탐색하며 경제 흐름을 파악하세요.")
 st.divider()
 
 # --- 사이드바 설정 영역 (업데이트 됨) ---
 with st.sidebar:
-    st.header("⚙️ 탐색 설정")
+    st.header("⚙️ 설정")
     
     # 1. 카테고리 선택 및 동적 URL 생성
     category = st.selectbox(
@@ -172,7 +172,7 @@ if st.session_state.get("news_list"):
 
     if st.button("✨ 이 기사 AI 심층 분석하기", use_container_width=True):
         st.session_state.article_body = get_article_content(selected_news['link'])
-        with st.spinner("AI가 기사를 분석하고 감성 지수를 산출 중입니다..."):
+        with st.spinner("AI가 기사를 분석하고 시장 반응 정를 산출 중입니다..."):
             raw_report = analyze_news_with_ai(selected_news['title'], st.session_state.article_body)
             score_match = re.search(r'\[SCORE\]\s*(\d+)\s*\[/SCORE\]', raw_report)
             if score_match:
