@@ -172,7 +172,7 @@ if st.session_state.get("news_list"):
 
     if st.button("✨ 이 기사 AI 심층 분석하기", use_container_width=True):
         st.session_state.article_body = get_article_content(selected_news['link'])
-        with st.spinner("AI가 기사를 분석하고 시장 반응 정를 산출 중입니다..."):
+        with st.spinner("AI가 기사를 분석하고 시장 예상 반응을 산출 중입니다..."):
             raw_report = analyze_news_with_ai(selected_news['title'], st.session_state.article_body)
             score_match = re.search(r'\[SCORE\]\s*(\d+)\s*\[/SCORE\]', raw_report)
             if score_match:
